@@ -1,0 +1,11 @@
+field_name,data_type,meaning,privacy_classification_and_risk,validation_or_cleaning_rule,sensitivity
+PatientID,String / identifier,Record linkage within this sample,Direct identifier-like field; looks pseudonymous but uniqueness does not prove de-identification,Check missingness and uniqueness; do not publish if linkable to real identities,High
+Age,Integer (years),Age of patient in years,"Quasi-identifier; exact age can increase re-identification risk, especially at extremes",Integer and broad 0–120 technical range; retain missing values; flag outliers,High
+Gender,Categorical string,Gender category as represented in source,Potentially identifying in combination with other attributes,Trim whitespace and normalize capitalization; flag unexpected categories,Medium
+Diagnosis,Categorical string,Recorded diagnosis,Sensitive health information,Trim whitespace and normalize capitalization; do not infer or alter diagnosis,High
+PrimaryMedication,Categorical string,Primary medication name,Sensitive health information; may imply a condition,Trim whitespace and normalize capitalization; do not infer or alter medication,High
+DosageMg,"Numeric (mg, assumed from field name)",Recorded medication dosage in mg,Sensitive treatment information; unit and valid range need source confirmation,Flag negative values; preserve missing values; do not infer dosage,High
+TreatmentDurationDays,Integer (days),Recorded treatment duration in days,Sensitive treatment information,Require non-negative whole number; preserve missing values,Medium
+Readmitted,Categorical string,Whether record indicates readmission,Sensitive healthcare outcome,Normalize Yes/No casing; flag unexpected categories; do not infer outcome,High
+BloodPressure,"String, systolic/diastolic","Blood pressure as displayed (e.g., 120/80)",Sensitive clinical measurement,Check format; remove spaces around format only; clinical interpretation requires qualified review,High
+CholesterolLevel,Integer; unit not supplied,Recorded cholesterol level,Sensitive clinical measurement; interpretation depends on units and context,Check numeric type and broad technical plausibility; do not change clinical values; confirm units/range,High
